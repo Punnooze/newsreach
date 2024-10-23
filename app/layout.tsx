@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Onest } from 'next/font/google';
 import Sidebar from '@/components/Sidebar';
+import Navbar from '@/components/Navbar';
 
 const onest = Onest({
   subsets: ['latin'],
@@ -22,10 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${onest.variable} grid grid-cols-6 w-[100vw] h-[100vh] overflow-x-hidden bg-lightbg `}
+        className={`${onest.variable} grid grid-cols-6 w-[100vw] h-[100vh] overflow-x-hidden bg-greybg `}
       >
         <Sidebar />
-        <div className="col-span-5 overflow-y-auto bg-greybg">{children}</div>
+        <div className="col-span-5 overflow-y-auto bg-greybg h-[100vh] flex flex-col">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );

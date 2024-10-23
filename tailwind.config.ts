@@ -12,10 +12,20 @@ const config: Config = {
       fontFamily: {
         onest: ['var(--font-onest)'],
       },
+      // fontSize: {
+      //   h1: '57px',
+      //   h2: '45px',
+      //   h3: '36px',
+      //   h4: '32px',
+      //   h5: '28px',
+      //   h6: '24px',
+      //   p: '16px',
+      // },
       colors: {
-        lightbg: '#F4F4FD',
+        lightbg: '#FCFCFD',
         greybg: '#EDF0F4',
-        textgrey: '#707070',
+        textgrey: '#101828',
+        borderGrey: '#D0D5DD',
         contentDark: '#101828',
         contentSecondary: '#344054',
         contentLight: '#667085',

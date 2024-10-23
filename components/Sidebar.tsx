@@ -1,3 +1,4 @@
+'use client';
 import {
   Select,
   SelectContent,
@@ -37,12 +38,21 @@ import { IoInformationCircleOutline } from 'react-icons/io5';
 import { MdOutlineStackedBarChart } from 'react-icons/md';
 import logoLarge from '../assets/logo.png';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Sidebar() {
+  const router = useRouter();
+  const pathname = usePathname()
+    .substring(1, usePathname().length)
+    .split('/')[1];
+
   return (
-    <div className=" flex flex-col justify-between">
+    <div className=" flex flex-col justify-between shadow-md bg-lightbg z-50">
       <div>
-        <div className="px-[20px] py-[10px]">
+        <div
+          onClick={() => router.push('/')}
+          className="px-[20px] py-[10px] cursor-pointer"
+        >
           <Image src={logoLarge} alt="Logo" className="" />
         </div>
 
@@ -70,11 +80,21 @@ export default function Sidebar() {
               </div>
               <div className="py-[15px]"></div>
               <p className="pl-[20px] text-[12px]">Online News</p>
-              <div className="flex items-center  py-[15px] hover:bg-greybg px-[20px] cursor-pointer">
+              <div
+                onClick={() => router.push('/online-news/overview')}
+                className={`flex items-center  py-[15px] hover:bg-greybg px-[20px] cursor-pointer ${
+                  pathname === 'overview' ? 'text-red600 bg-red600/5' : ''
+                }`}
+              >
                 <MdSpeed className="mr-[10px] h-[17px] w-[17px]" />
                 Overview
               </div>
-              <div className="flex items-center  py-[15px] hover:bg-greybg px-[20px] cursor-pointer">
+              <div
+                onClick={() => router.push('/online-news/explore')}
+                className={`flex items-center  py-[15px] hover:bg-greybg px-[20px] cursor-pointer ${
+                  pathname === 'explore' ? 'text-red600 bg-red600/5' : ''
+                }`}
+              >
                 <MdExplore className="mr-[10px] h-[17px] w-[17px]" />
                 Explore
               </div>
@@ -137,22 +157,37 @@ export default function Sidebar() {
               </div>
             </AccordionContent>
           </AccordionItem>
-          <div className="px-[20px] text-textgrey py-[15px] hover:bg-greybg flex justify-between items-center border-b">
+          <div
+            onClick={() => router.push('/reports')}
+            className={`px-[20px] text-textgrey py-[15px] hover:bg-greybg flex justify-between items-center border-b ${
+              pathname === 'reports' ? 'text-red600 bg-red600/5' : ''
+            }`}
+          >
             <div className="flex items-center text-[16px] ">
               <FaRegClipboard className="mr-[15px] h-[20px] w-[20px]" />
               Reports
             </div>
             <MdChevronRight className="h-[20px] w-[20px]" />
           </div>
-          <div className="px-[20px] text-textgrey py-[15px] hover:bg-greybg flex justify-between items-center border-b">
+          <div
+            onClick={() => router.push('/ai-report')}
+            className={`px-[20px] text-textgrey py-[15px] hover:bg-greybg flex justify-between items-center border-b ${
+              pathname === 'ai-report' ? 'text-red600 bg-red600/5' : ''
+            }`}
+          >
             <div className="flex items-center text-[16px] ">
               <LuCircuitBoard className="mr-[15px] h-[20px] w-[20px]" />
               AI Coverage Report
             </div>
             <MdChevronRight className="h-[20px] w-[20px]" />
           </div>
-          <div className="px-[20px] text-textgrey py-[15px] hover:bg-greybg flex justify-between items-center border-b">
-            <div className="flex items-center text-[16px] ">
+          <div
+            onClick={() => router.push('/spotlight')}
+            className={`px-[20px] text-textgrey py-[15px] hover:bg-greybg flex justify-between items-center border-b ${
+              pathname === 'spotlight' ? 'text-red600 bg-red600/5' : ''
+            }`}
+          >
+            <div className="flex items-center text-[16px]">
               <FaRegLightbulb className="mr-[15px] h-[20px] w-[20px]" />
               Spotlight
             </div>
@@ -193,22 +228,21 @@ export default function Sidebar() {
       <div className="w-full flex ">
         <Select>
           <SelectTrigger className="w-full border-none shadow-none focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none p-0 m-0 flex rounded-none h-full">
-            <div className="border-b border-r border-black h-full p-[10px] w-[25%] ">
+            <div className=" h-full p-[10px] w-[25%] ">
               <div className="p-[5px] border rounded-sm">
-                <p className="bg-lime-100 p-[5px] rounded-sm">H</p>
+                <p className="bg-red600/30 p-[5px] rounded-sm">T</p>
               </div>
             </div>
-            <div className="border-b border-black h-full w-[75%] flex justify-center items-center p-[10px]">
-              <div className="border p-[10px] flex w-full rounded-sm items-center justify-between">
+            <div className=" h-full w-[75%] flex justify-center items-center p-[10px]   border-l-[1px] border-textgrey/70">
+              <div className=" p-[10px] flex w-full rounded-sm items-center justify-between">
                 <p>Team123456</p>
                 <MdKeyboardArrowDown />
               </div>
             </div>
           </SelectTrigger>
           <SelectContent className="">
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
+            <SelectItem value="ws1">Workspace 1</SelectItem>
+            <SelectItem value="ws2">Workspace 2</SelectItem>
           </SelectContent>
         </Select>
       </div>

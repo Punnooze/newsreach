@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Onest } from 'next/font/google';
+import Sidebar from '@/components/Sidebar';
 
 const onest = Onest({
   subsets: ['latin'],
@@ -21,9 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${onest.variable}`}
+        className={`${onest.variable} grid grid-cols-6 w-[100vw] h-[100vh] overflow-x-hidden bg-lightbg `}
       >
-        {children}
+        <Sidebar />
+        <div className="col-span-5 overflow-y-auto bg-greybg">{children}</div>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <p>Hello</p>
     </div>
-    <div>
+    <div className="h-[1000px]">
       <p>Big Div</p>
     </div>
     </>

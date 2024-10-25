@@ -101,7 +101,7 @@ export default function Navbar() {
             correctedPaths.map((path, index) => {
               if (index !== correctedPaths.length - 1) {
                 return (
-                  <div key={index}>
+                  <div key={index} className='flex items-center'>
                     <span className="hover:underline text-md">{path}</span>
                     <FaChevronRight className=" text-s mx-[3px]" />
                   </div>

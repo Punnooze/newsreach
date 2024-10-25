@@ -59,25 +59,17 @@ const projects = [
 
 export default function Navbar() {
   const router = useRouter();
-  const pathname = usePathname();
-  let paths = [];
-  if (pathname !== '/') {
-    paths = pathname.substring(1, pathname.length).split('/');
-  } else {
-    paths = ['', ''];
-  }
-  const correctedPaths: string[] = [];
+  const pathname = usePathname(); // Move usePathname hook outside of the conditional statement
 
-  paths.forEach((path: string) => {
-    const correctedPath = path.replace('-', ' ');
-
-    const capitalizedPath = correctedPath
+  // Define paths and correctedPaths outside of the conditional rendering
+  const paths = pathname !== '/' ? pathname.substring(1).split('/') : ['', ''];
+  const correctedPaths = paths.map((path) =>
+    path
+      .replace('-', ' ')
       .split(' ')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-
-    correctedPaths.push(capitalizedPath);
-  });
+      .join(' ')
+  );
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('team123456');

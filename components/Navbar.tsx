@@ -62,8 +62,7 @@ export default function Navbar() {
   const pathname = usePathname();
   let paths = [];
   if (pathname !== '/') {
-    const path = pathname.substring(1, pathname.length);
-    paths = path.split('/');
+    paths = pathname.substring(1, pathname.length).split('/');
   } else {
     paths = ['', ''];
   }
@@ -110,12 +109,10 @@ export default function Navbar() {
             correctedPaths.map((path, index) => {
               if (index !== correctedPaths.length - 1) {
                 return (
-                  <>
-                    <span key={index} className="hover:underline text-md">
-                      {path}
-                    </span>
+                  <div key={index}>
+                    <span className="hover:underline text-md">{path}</span>
                     <FaChevronRight className=" text-s mx-[3px]" />
-                  </>
+                  </div>
                 );
               } else {
                 return (

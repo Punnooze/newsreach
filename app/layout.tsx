@@ -3,6 +3,7 @@ import './globals.css';
 import { Onest } from 'next/font/google';
 import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
+import { Toaster } from '@/components/ui/toaster';
 
 const onest = Onest({
   subsets: ['latin'],
@@ -23,13 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${onest.variable} grid grid-cols-6 w-[100vw] h-[100vh] overflow-x-hidden bg-greybg `}
+        className={`${onest.variable} grid grid-cols-6 w-[100vw] h-[100vh] overflow-x-hidden bg-lightGrey text-contentPrimary`}
       >
         <Sidebar />
-        <div className="col-span-5 overflow-y-auto bg-greybg h-[100vh] flex flex-col">
+        <div className="col-span-5 overflow-y-auto bg-lightGrey h-[100vh] flex flex-col text-contentPrimary">
           <Navbar />
           {children}
         </div>
+        <Toaster />
       </body>
     </html>
   );

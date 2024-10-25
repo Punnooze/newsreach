@@ -215,7 +215,6 @@ export default function Navbar() {
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <button
-                  // role="combobox"
                   aria-expanded={open}
                   className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[10px] rounded-md"
                 >

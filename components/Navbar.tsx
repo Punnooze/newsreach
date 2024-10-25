@@ -46,13 +46,23 @@ import {
 } from '@/components/ui/popover';
 import * as React from 'react';
 import { ChevronsUpDown } from 'lucide-react';
+const projects = [
+  {
+    value: 'team123456',
+    label: 'Team123456',
+  },
+  {
+    value: 'team1234',
+    label: 'Team1234',
+  },
+];
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   let paths = [];
   if (pathname !== '/') {
-    const path = usePathname().substring(1, usePathname().length);
+    const path = pathname.substring(1, pathname.length);
     paths = path.split('/');
   } else {
     paths = ['', ''];
@@ -72,17 +82,6 @@ export default function Navbar() {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('team123456');
-
-  const projects = [
-    {
-      value: 'team123456',
-      label: 'Team123456',
-    },
-    {
-      value: 'team1234',
-      label: 'Team1234',
-    },
-  ];
 
   useEffect(() => {
     if (value === '') {
@@ -227,7 +226,7 @@ export default function Navbar() {
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <button
-                  role="combobox"
+                  // role="combobox"
                   aria-expanded={open}
                   className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[10px] rounded-md"
                 >

@@ -57,12 +57,11 @@ const projects = [
     label: 'Team1234',
   },
 ];
+const pathList = ['Overview'];
 
 export default function Navbar() {
   const router = useRouter();
-  const pathname = usePathname(); // Move usePathname hook outside of the conditional statement
-
-  // Define paths and correctedPaths outside of the conditional rendering
+  const pathname = usePathname();
   const paths = pathname !== '/' ? pathname.substring(1).split('/') : ['', ''];
   const correctedPaths = paths.map((path) =>
     path
@@ -82,7 +81,7 @@ export default function Navbar() {
   }, [value]);
 
   return (
-    <div className="bg-fe w-[84%] fixed lg:flex flex-col pl-[20px] pr-[20px] py-[20px]  border-b border-borderGrey shadow-md hidden ">
+    <div className="bg-fe w-[84%] fixed lg:flex flex-col p-[20px] px-[30px]  border-b border-borderGrey shadow-md hidden ">
       <div className="w-full flex justify-between mb-[20px]">
         <div className="flex items-center cursor-pointer">
           <span
@@ -211,63 +210,65 @@ export default function Navbar() {
             {correctedPaths[correctedPaths.length - 1]}
           </p>
         )}
-        <div className="flex items-center">
-          <div>
-            <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
-                <button
-                  aria-expanded={open}
-                  className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[10px] rounded-md"
-                >
-                  {value
-                    ? projects.find((project) => project.value === value)
-                        ?.label + ' insights'
-                    : 'Select project'}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0 bg-disabled">
-                <Command>
-                  <CommandInput placeholder="Search project..." />
-                  <CommandList>
-                    <CommandEmpty>No project found.</CommandEmpty>
-                    <CommandGroup>
-                      {projects.map((project) => (
-                        <CommandItem
-                          key={project.value}
-                          value={project.value}
-                          className="bg-contentDisable/30 text-contentPrimary mt-[5px]"
-                          onSelect={(currentValue) => {
-                            setValue(
-                              currentValue === value ? '' : currentValue
-                            );
-                            setOpen(false);
-                          }}
-                        >
-                          {project.label}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
+        {pathList.includes(correctedPaths[correctedPaths.length - 1]) && (
+          <div className="flex items-center">
+            <div>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <button
+                    aria-expanded={open}
+                    className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[10px] rounded-md"
+                  >
+                    {value
+                      ? projects.find((project) => project.value === value)
+                          ?.label + ' insights'
+                      : 'Select project'}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0 bg-disabled">
+                  <Command>
+                    <CommandInput placeholder="Search project..." />
+                    <CommandList>
+                      <CommandEmpty>No project found.</CommandEmpty>
+                      <CommandGroup>
+                        {projects.map((project) => (
+                          <CommandItem
+                            key={project.value}
+                            value={project.value}
+                            className="bg-contentDisable/30 text-contentPrimary mt-[5px]"
+                            onSelect={(currentValue) => {
+                              setValue(
+                                currentValue === value ? '' : currentValue
+                              );
+                              setOpen(false);
+                            }}
+                          >
+                            {project.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="flex">
+              <Sheet>
+                <SheetTrigger className="border flex items-center justify-center p-[10px] rounded-md border-borderGrey">
+                  <p className="mr-[5px]">Filters</p>
+                  <FaFilter />
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>FILTERS</SheetTitle>
+                    <SheetDescription>Add Filterss</SheetDescription>
+                  </SheetHeader>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
-          <div className="flex">
-            <Sheet>
-              <SheetTrigger className="border flex items-center justify-center p-[10px] rounded-md border-borderGrey">
-                <p className="mr-[5px]">Filters</p>
-                <FaFilter />
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>FILTERS</SheetTitle>
-                  <SheetDescription>Add Filterss</SheetDescription>
-                </SheetHeader>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

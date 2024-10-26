@@ -8,9 +8,9 @@ import logoBig from '../assets/logo.svg';
 import close from '../assets/close.svg';
 import Image from 'next/image';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-
+import { useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa6';
-// import { FaFilter } from 'react-icons/fa';
+import { FaFilter } from 'react-icons/fa';
 import { IoLogOutOutline } from 'react-icons/io5';
 import {
   Select,
@@ -18,14 +18,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from '@/components/ui/select';
-import {
-  Sheet,
-  SheetContent,
-  // SheetDescription,
-  // SheetHeader,
-  // SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,43 +30,141 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
 import SidebarAccordion from './SidebarAccordion';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import * as React from 'react';
+import { ChevronsUpDown } from 'lucide-react';
+const projects = [
+  {
+    value: 'team123456',
+    label: 'Team123456',
+  },
+  {
+    value: 'team1234',
+    label: 'Team1234',
+  },
+];
+
+const pathList = ['Overview'];
 
 export default function TopBar() {
   const router = useRouter();
+  const pathname = usePathname();
+  const paths = pathname !== '/' ? pathname.substring(1).split('/') : ['', ''];
+  const correctedPaths = paths.map((path) =>
+    path
+      .replace('-', ' ')
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  );
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('team123456');
+
   return (
-    <div className="bg-fe flex lg:hidden px-[20px] py-[10px] z-50 fixed w-full border border-x-0 border-t-0 border-borderGrey shadow-md">
+    <div className="bg-fe lg:hidden px-[20px] py-[10px] z-50 fixed w-full border border-x-0 border-t-0 border-borderGrey shadow-md flex flex-col">
       <div className=" flex  w-full justify-between ">
         <Image
           onClick={() => router.push('/')}
           src={logo}
           alt="logo"
-          className="cursor-pointer"
+          className="cursor-pointer md:hidden"
         />
+        <Image
+          onClick={() => router.push('/')}
+          src={logoBig}
+          alt="logo"
+          className="cursor-pointer hidden md:block"
+        />
+        {pathList.includes(correctedPaths[correctedPaths.length - 1]) && (
+          <div className="md:hidden">
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <button
+                  aria-expanded={open}
+                  className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[7px] rounded-md text-pS"
+                >
+                  {value
+                    ? projects.find((project) => project.value === value)
+                        ?.label + ' insights'
+                    : 'Select project'}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] p-0 bg-disabled">
+                <Command>
+                  <CommandInput placeholder="Search project..." />
+                  <CommandList>
+                    <CommandEmpty>No project found.</CommandEmpty>
+                    <CommandGroup>
+                      {projects.map((project) => (
+                        <CommandItem
+                          key={project.value}
+                          value={project.value}
+                          className="bg-contentDisable/30 text-contentPrimary mt-[5px]"
+                          onSelect={(currentValue) => {
+                            setValue(
+                              currentValue === value ? '' : currentValue
+                            );
+                            setOpen(false);
+                          }}
+                        >
+                          {project.label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          </div>
+        )}
         <div className="flex gap-[10px]">
-          <div className="flex items-center relative hover:bg-red/20 p-[7px] px-[8px] rounded-full">
+          <div className="flex items-center relative hover:bg-red/20 p-[7px] px-[10px] rounded-full">
             <Image
               src={notif}
               alt="notif"
               className="cursor-pointer w-[16px]"
             />
-            <div className="absolute bg-radical h-[8px] w-[8px] rounded-full right-[8px] top-[8px]" />
+            <div className="absolute bg-radical h-[8px] w-[8px] rounded-full right-[10px] top-[10px]" />
           </div>
-          <div className="flex items-center hover:bg-red/20 p-[7px] px-[7px] rounded-full">
+          <div className="flex items-center hover:bg-red/20 p-[7px] px-[10px] rounded-full">
             <Image
               src={heart}
               alt="heart"
               className="cursor-pointer w-[18px] "
             />
           </div>
-          <div className="flex items-center hover:bg-red/20 p-[7px] px-[7px] rounded-full">
+          <div className="flex items-center hover:bg-red/20 p-[7px] px-[9px] rounded-full">
             <Image src={cart} alt="cart" className="cursor-pointer w-[18px]" />
           </div>
 
           <Sheet>
-            <SheetTrigger className="flex items-center hover:bg-red/20 p-[7px] px-[7px] rounded-full">
+            <SheetTrigger className="flex items-center hover:bg-red/20 p-[7px] px-[9px] rounded-full">
               <Image
                 src={menu}
                 alt="menu"
@@ -201,6 +292,72 @@ export default function TopBar() {
             </SheetContent>
           </Sheet>
         </div>
+      </div>
+      <div className="flex justify-between items-center mt-[20px]">
+        {pathname === '/' ? (
+          <p className="text-[32px]">Home</p>
+        ) : (
+          <p className="text-[32px]">
+            {correctedPaths[correctedPaths.length - 1]}
+          </p>
+        )}
+        {pathList.includes(correctedPaths[correctedPaths.length - 1]) && (
+          <div className="flex items-center">
+            <div className="mr-[20px] hidden md:block">
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <button
+                    aria-expanded={open}
+                    className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[10px] rounded-md text-pS"
+                  >
+                    {value
+                      ? projects.find((project) => project.value === value)
+                          ?.label + ' insights'
+                      : 'Select project'}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0 bg-disabled">
+                  <Command>
+                    <CommandInput placeholder="Search project..." />
+                    <CommandList>
+                      <CommandEmpty>No project found.</CommandEmpty>
+                      <CommandGroup>
+                        {projects.map((project) => (
+                          <CommandItem
+                            key={project.value}
+                            value={project.value}
+                            className="bg-contentDisable/30 text-contentPrimary mt-[5px]"
+                            onSelect={(currentValue) => {
+                              setValue(
+                                currentValue === value ? '' : currentValue
+                              );
+                              setOpen(false);
+                            }}
+                          >
+                            {project.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <Sheet>
+              <SheetTrigger className="border flex items-center justify-center p-[5px] md:p-[10px] rounded-md border-borderGrey">
+                <p className="mr-[5px]">Filters</p>
+                <FaFilter className="text-pS " />
+              </SheetTrigger>
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle>FILTERS</SheetTitle>
+                  <SheetDescription>Add Filterss</SheetDescription>
+                </SheetHeader>
+              </SheetContent>
+            </Sheet>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ export default function RootLayout({
         <div className="col-span-6 lg:col-span-5 overflow-y-auto bg-lightGrey h-[100vh] flex flex-col text-contentPrimary">
           <Navbar />
           <TopBar />
-          <div className='mt-[50px] lg:mt-[150px]'>
+          <div className='mt-[130px] lg:mt-[150px]'>
           {children}
           </div>
         </div>

@@ -91,7 +91,7 @@ export default function SidebarAccordion() {
           <div
             onClick={() => router.push('/trends/online-news/overview')}
             className={`flex items-center  py-[12px] lg:py-[15px] hover:bg-lightGrey px-[20px] cursor-pointer ${
-              pathname === 'overview' ? 'text-red bg-red/5' : ''
+              pathname === 'overview' ? 'text-red bg-red/5 font-semibold' : ''
             }`}
           >
             <MdSpeed className="mr-[10px] h-[17px] w-[17px]" />
@@ -100,7 +100,7 @@ export default function SidebarAccordion() {
           <div
             onClick={() => router.push('/trends/online-news/explore')}
             className={`flex items-center  py-[12px] lg:py-[15px] hover:bg-lightGrey px-[20px] cursor-pointer ${
-              pathname === 'explore' ? 'text-red bg-red/5' : ''
+              pathname === 'explore' ? 'text-red bg-red/5 font-semibold' : ''
             }`}
           >
             <MdExplore className="mr-[10px] h-[17px] w-[17px]" />
@@ -168,7 +168,7 @@ export default function SidebarAccordion() {
       <div
         onClick={() => router.push('/reports')}
         className={`px-[20px] text-textgrey py-[12px] lg:py-[15px] hover:bg-lightGrey flex justify-between items-center border-b border-borderGrey ${
-          pathname === 'reports' ? 'text-red bg-red/5' : ''
+          pathname === 'reports' ? 'text-red bg-red/5 font-semibold' : ''
         }`}
       >
         <div className="flex items-center text-[16px] ">
@@ -180,7 +180,7 @@ export default function SidebarAccordion() {
       <div
         onClick={() => router.push('/ai-report')}
         className={`px-[20px] text-textgrey py-[12px] lg:py-[15px] hover:bg-lightGrey flex justify-between items-center border-b border-borderGrey ${
-          pathname === 'ai-report' ? 'text-red bg-red/5' : ''
+          pathname === 'ai-report' ? 'text-red bg-red/5 font-semibold' : ''
         }`}
       >
         <div className="flex items-center text-[16px] ">
@@ -192,10 +192,10 @@ export default function SidebarAccordion() {
       <div
         onClick={() => router.push('/spotlight')}
         className={`px-[20px] text-textgrey py-[12px] lg:py-[15px] hover:bg-lightGrey flex justify-between items-center border-b border-borderGrey ${
-          pathname === 'spotlight' ? 'text-red bg-red/5' : ''
+          pathname === 'spotlight' ? 'text-red bg-red/5 font-semibold' : ''
         }`}
       >
-        <div className="flex items-center text-[16px]">
+        <div className="flex items-center text-[16px] ">
           <FaRegLightbulb className="mr-[15px] h-[20px] w-[20px]" />
           Spotlight
         </div>

@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className=" flex flex-col items-center justify-center">
       <LottieComp />
-      <div className="absolute bottom-[100px] lg:bottom-[50px] flex flex-col justify-center items-center">
+      <div className="absolute bottom-[200px] lg:bottom-[50px] flex flex-col justify-center items-center">
         <h2>View your data!</h2>
         <button
           onClick={() => router.push('/trends/online-news/overview')}

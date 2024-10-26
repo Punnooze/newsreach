@@ -228,7 +228,10 @@ export default function SidebarAccordion() {
             <IoInformationCircleOutline className="mr-[10px] h-[17px] w-[17px]" />
             Company Info
           </div>
-          <div className="flex items-center  py-[12px] lg:py-[15px] hover:bg-lightGrey px-[20px] cursor-pointer">
+          <div
+            onClick={() => router.push('/settings/subscription')}
+            className="flex items-center  py-[12px] lg:py-[15px] hover:bg-lightGrey px-[20px] cursor-pointer"
+          >
             <MdOutlineStackedBarChart className="mr-[10px] h-[17px] w-[17px]" />
             Subscription
           </div>

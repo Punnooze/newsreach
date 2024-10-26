@@ -100,49 +100,6 @@ export default function TopBar() {
           alt="logo"
           className="cursor-pointer hidden md:block"
         />
-        {pathList.includes(correctedPaths[correctedPaths.length - 1]) && (
-          <div className="md:hidden">
-            <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
-                <button
-                  aria-expanded={open}
-                  className=" justify-between flex mr-[20px] border border-borderGrey items-center p-[7px] rounded-md text-pS"
-                >
-                  {value
-                    ? projects.find((project) => project.value === value)
-                        ?.label + ' insights'
-                    : 'Select project'}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0 bg-disabled">
-                <Command>
-                  <CommandInput placeholder="Search project..." />
-                  <CommandList>
-                    <CommandEmpty>No project found.</CommandEmpty>
-                    <CommandGroup>
-                      {projects.map((project) => (
-                        <CommandItem
-                          key={project.value}
-                          value={project.value}
-                          className="bg-contentDisable/30 text-contentPrimary mt-[5px]"
-                          onSelect={(currentValue) => {
-                            setValue(
-                              currentValue === value ? '' : currentValue
-                            );
-                            setOpen(false);
-                          }}
-                        >
-                          {project.label}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-          </div>
-        )}
         <div className="flex gap-[10px]">
           <div className="flex items-center relative hover:bg-red/20 p-[7px] px-[10px] rounded-full">
             <Image

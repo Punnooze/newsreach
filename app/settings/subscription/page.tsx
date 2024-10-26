@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-function page() {
+function Page() {
   const [state, setState] = useState('plan');
   return (
     <div className="w-full h-full p-[20px] ">
@@ -133,4 +133,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

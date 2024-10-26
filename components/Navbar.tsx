@@ -2,13 +2,14 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { AiFillCaretDown } from 'react-icons/ai';
+import { FaChevronRight } from 'react-icons/fa6';
+import { FaFilter } from 'react-icons/fa';
+import { IoLogOutOutline } from 'react-icons/io5';
 import cart from '../assets/cart.svg';
 import heart from '../assets/heart.svg';
 import notif from '../assets/notif.svg';
 import { useRouter, usePathname } from 'next/navigation';
-import { FaChevronRight } from 'react-icons/fa6';
-import { FaFilter } from 'react-icons/fa';
-import { IoLogOutOutline } from 'react-icons/io5';
+
 import {
   Sheet,
   SheetContent,
@@ -81,7 +82,7 @@ export default function Navbar() {
   }, [value]);
 
   return (
-    <div className="bg-fe w-[84%] fixed flex flex-col pl-[20px] pr-[20px] py-[20px]  border-b border-borderGrey shadow-md">
+    <div className="bg-fe w-[84%] fixed lg:flex flex-col pl-[20px] pr-[20px] py-[20px]  border-b border-borderGrey shadow-md hidden ">
       <div className="w-full flex justify-between mb-[20px]">
         <div className="flex items-center cursor-pointer">
           <span
@@ -101,7 +102,7 @@ export default function Navbar() {
             correctedPaths.map((path, index) => {
               if (index !== correctedPaths.length - 1) {
                 return (
-                  <div key={index} className='flex items-center'>
+                  <div key={index} className="flex items-center">
                     <span className="hover:underline text-md">{path}</span>
                     <FaChevronRight className=" text-s mx-[3px]" />
                   </div>
